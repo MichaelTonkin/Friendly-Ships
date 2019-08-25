@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 var player
 var fireDest
+var reloading = 0.0
+var RELOAD_TIME = 1.0
 onready var laser = preload("res://Scenes/Bullets.tscn")
 
 func _ready():
@@ -18,11 +20,15 @@ func aim_and_move():
 	self.look_at(player.get_player_position())
 
 func open_fire(delta):
-	fireDest = (player.position - self.position).normalized()
 	
-	var l = laser.instance()
-	get_tree().get_root().add_child(l)
-	l.set_position(self.position)
-	
-	l.set_direction(fireDest * 500 * delta)
-	
+	if (reloading <= 0.0):
+		
+		fireDest = (player.position - self.position).normalized()
+		var l = laser.instance()
+		get_tree().get_root().add_child(l)
+		l.set_position(self.position)
+		l.set_direction(fireDest * 500 * delta)
+		
+		reloading = RELOAD_TIME
+		
+	reloading -= delta
