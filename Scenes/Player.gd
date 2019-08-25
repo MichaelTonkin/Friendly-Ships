@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var speed = 10000
+const SPEED = 500
 var health = 100
 var mousePosition
 var velocity
@@ -32,7 +32,7 @@ func move_player(delta):
 		
 		globalMouse = get_global_mouse_position()
 		velocity = (globalMouse - position).normalized()
-		move_and_slide(velocity * speed * delta)
+		move_and_collide(velocity * SPEED * delta)
 
 #function: fire_controller
 #description: handles shooting
@@ -48,7 +48,7 @@ func fire_controller(delta):
 		get_tree().get_root().add_child(l)
 		l.set_position(self.position)
 		
-		l.set_direction(fireDest * 500 * delta)
+		l.set_direction(fireDest * 800 * delta)
 	
 
 func set_health(var num):
@@ -59,3 +59,6 @@ func get_health():
 	
 func get_player_position():
 	return self.position
+	
+func get_speed():
+	return SPEED

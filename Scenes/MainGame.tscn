@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/MainGame.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.gd" type="Script" id=2]
 [ext_resource path="res://Textures/player_ship_tex.png" type="Texture" id=3]
+[ext_resource path="res://Textures/Sky_tex.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 44.3342, 38.0323 )
@@ -25,4 +26,16 @@ shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground"]
+position = Vector2( 492.456, 345.536 )
+scale = Vector2( 1.02177, 1 )
+texture = ExtResource( 4 )
+
+[node name="Light2D" type="Light2D" parent="ParallaxBackground"]
+texture = ExtResource( 4 )
+texture_scale = 50.0
+energy = 100.0
 
