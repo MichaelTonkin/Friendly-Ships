@@ -56,3 +56,6 @@ func set_health(var num):
 	
 func get_health():
 	return health
+	
+func get_player_position():
+	return self.position
