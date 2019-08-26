@@ -42,6 +42,7 @@ func open_fire(delta):
 		fireDest = playerPos
 		var l = laser.instance()
 		get_tree().get_root().add_child(l)
+		l.add_collision_exception_with(self)
 		l.set_shooters_name(self.name)
 		l.set_position(self.position)
 		l.set_direction(fireDest * 50)

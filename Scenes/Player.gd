@@ -8,13 +8,12 @@ var globalMouse
 var fireDest
 var laser = preload("res://Scenes/Bullets.tscn")
 
-
 func _ready():
 	set_process(true)
 	
 func _process(delta):
 	pass
-
+	
 func _physics_process(delta):
 	move_player(delta)
 	fire_controller(delta)
@@ -46,6 +45,7 @@ func fire_controller(delta):
 		
 		var l = laser.instance()
 		get_tree().get_root().add_child(l)
+		l.add_collision_exception_with(self)
 		l.set_shooters_name(self.name)
 		l.set_position(self.position)
 		
