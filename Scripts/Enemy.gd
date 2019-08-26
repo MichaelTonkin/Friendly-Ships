@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+var health = 100
 var player
 var playerPos
 var friendly = true # 20% chance of being friendly
@@ -18,6 +19,9 @@ func _ready():
 	if(alignCheck <=20):
 		friendly = true
 
+func _process(delta):
+	if(health <= 0):
+		queue_free()
 
 func _physics_process(delta):
 	aim_and_move(delta)
@@ -53,3 +57,9 @@ func open_fire(delta):
 			ally = true
 			
 	reloading -= delta
+	
+func setHealth(var num):
+	health = num
+	
+func getHealth():
+	return health

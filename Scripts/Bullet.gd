@@ -17,6 +17,8 @@ func _physics_process(delta):
 			return
 		else:
 			queue_free()
+			if(collision.collider.has_method("setHealth")):
+				collision.collider.setHealth(collision.collider.getHealth() - 50)
 			
 #function:set_direction
 #description: initialises the bullet's direction

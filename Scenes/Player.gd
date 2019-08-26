@@ -12,7 +12,8 @@ func _ready():
 	set_process(true)
 	
 func _process(delta):
-	pass
+	if(health <= 0):
+		queue_free()
 	
 func _physics_process(delta):
 	move_player(delta)
@@ -52,10 +53,10 @@ func fire_controller(delta):
 		l.set_direction(fireDest * 800 * delta)
 	
 
-func set_health(var num):
+func setHealth(var num):
 	health = num
 	
-func get_health():
+func getHealth():
 	return health
 	
 func get_player_position():
