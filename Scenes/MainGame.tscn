@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/MainGame.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.gd" type="Script" id=2]
-[ext_resource path="res://Textures/player_ship_tex.png" type="Texture" id=3]
+[ext_resource path="res://Textures/player_ship_tex_2.png" type="Texture" id=3]
 [ext_resource path="res://Textures/Sky_tex.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -29,13 +29,8 @@ current = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
-[node name="Sprite" type="Sprite" parent="ParallaxBackground"]
-position = Vector2( 492.456, 345.536 )
-scale = Vector2( 1.02177, 1 )
+[node name="space_tex" type="Sprite" parent="ParallaxBackground"]
+position = Vector2( 495.796, 291.255 )
+scale = Vector2( 1.14202, 0.72108 )
 texture = ExtResource( 4 )
-
-[node name="Light2D" type="Light2D" parent="ParallaxBackground"]
-texture = ExtResource( 4 )
-texture_scale = 50.0
-energy = 100.0
 
