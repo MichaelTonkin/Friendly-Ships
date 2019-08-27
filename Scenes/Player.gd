@@ -7,13 +7,14 @@ var velocity
 var globalMouse
 var fireDest
 var laser = preload("res://Scenes/Bullets.tscn")
+var location = self.position
 
 func _ready():
 	set_process(true)
 	
 func _process(delta):
-	#if(health <= 0):
-		#queue_free()
+	if(health <= 0):
+		queue_free()
 	pass
 	
 func _physics_process(delta):
@@ -34,7 +35,7 @@ func move_player(delta):
 		globalMouse = get_global_mouse_position()
 		velocity = (globalMouse - position).normalized()
 		move_and_collide(velocity * SPEED * delta)
-		
+		location = self.position
 		#play animation
 		$Player_tex.play("fly")
 

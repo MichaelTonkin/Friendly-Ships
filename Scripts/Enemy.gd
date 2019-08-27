@@ -9,15 +9,18 @@ var ally = false #only true if entity is turned into ally
 var fireDest
 var reloading = 0.0
 var RELOAD_TIME = 1.0
+var attFormation
 onready var laser = preload("res://Scenes/Bullets.tscn")
 #onready var main = load("res://Scripts/MainGame.gd")
 var main
-
+var rand1
+var rand2 
 func _ready():
 	player = get_node("/root/MainGame/Player") 
 	main = get_node("/root/MainGame/")
 	set_process(true) 
-	
+	rand1 = rand_range(rand_range(-400, -200), rand_range(200, 400))
+	rand2 = rand_range(rand_range(-400, -200), rand_range(200, 400))
 	#check if this entity could be friendly
 	var alignCheck = rand_range(0, 100)
 	if(alignCheck <=20):
@@ -26,7 +29,6 @@ func _ready():
 func _process(delta):
 	
 	if(health <= 0):
-		print("yay")
 		main.score += 100
 		main.numShipsOnScreen -=1
 		self.queue_free()
@@ -40,13 +42,15 @@ func _physics_process(delta):
 func aim_and_move(delta):
 	playerPos = (player.position - self.position).normalized()*0.1
 	self.look_at(player.get_player_position())
-	move_and_collide((playerPos) * speed * delta)
 	
 	#if the entity is an ally make it follow right behind the player
 	if(ally == true):
 		move_and_collide((playerPos) * speed * delta)
 		set_collision_layer_bit(3, true)
 		set_collision_layer_bit(1, false)
+	else:
+		attFormation = (((player.location - Vector2(rand1, rand2)) - self.position).normalized()*0.1)
+		move_and_collide((attFormation) * (speed+1000) * delta)
 
 func open_fire(delta):
 	
