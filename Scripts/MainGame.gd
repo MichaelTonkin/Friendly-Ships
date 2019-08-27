@@ -3,7 +3,7 @@
 
 extends Node2D
 
-onready var ship = preload("res://Scenes/Enemy.tscn")
+onready var ship = load("res://Scenes/Enemy.tscn")
 var score = 0
 var numShipsOnScreen = 0 #the number of ships currently in the game
 var randomLoc
@@ -20,16 +20,20 @@ func _process(delta):
 func spawn_ships():
 	
 	#if score is < 500 spawn 5 ships
-	if((score <= 500) and !(score > 501) and (numShipsOnScreen < 5)):
+	if((numShipsOnScreen < 5)):
 		var s = ship.instance()
 		add_child(s)
 		randomLoc = get_node("Player").get_position() + Vector2(int(rand_range(-500, 500)), int(rand_range(-500, 500)))
 		s.set_position(randomLoc)
 		numShipsOnScreen += 1
 		
-func set_score(var num):
-	score += num
-	print(score)
-	
-func get_score():
-	return score
+#static func set_score(var num):
+#	score += num
+#	print(score)
+#
+#func get_score():
+#	return score
+#
+#static func setShips(var num):
+#	numShipsOnScreen += num
+#	print(numShipsOnScreen)

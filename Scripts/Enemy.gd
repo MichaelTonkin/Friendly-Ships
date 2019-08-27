@@ -10,10 +10,12 @@ var fireDest
 var reloading = 0.0
 var RELOAD_TIME = 1.0
 onready var laser = preload("res://Scenes/Bullets.tscn")
-onready var main = load("res://Scripts/MainGame.gd")
+#onready var main = load("res://Scripts/MainGame.gd")
+var main
 
 func _ready():
 	player = get_node("/root/MainGame/Player") 
+	main = get_node("/root/MainGame/")
 	set_process(true) 
 	
 	#check if this entity could be friendly
@@ -22,8 +24,11 @@ func _ready():
 		friendly = true
 
 func _process(delta):
+	
 	if(health <= 0):
-		main.set_score(100)
+		print("yay")
+		main.score += 100
+		main.numShipsOnScreen -=1
 		self.queue_free()
 
 func _physics_process(delta):
