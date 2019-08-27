@@ -1,11 +1,20 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/MainGame.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.gd" type="Script" id=2]
-[ext_resource path="res://Textures/player_ship_tex_2.png" type="Texture" id=3]
-[ext_resource path="res://Textures/Sky_tex.png" type="Texture" id=4]
+[ext_resource path="res://Textures/player_ship_move1.png" type="Texture" id=3]
+[ext_resource path="res://Textures/player_ship_move2.png" type="Texture" id=4]
+[ext_resource path="res://Textures/Sky_tex.png" type="Texture" id=5]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "fly",
+"speed": 4.97
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 44.3342, 38.0323 )
 
 [node name="MainGame" type="Node2D"]
@@ -15,22 +24,24 @@ script = ExtResource( 1 )
 position = Vector2( 493.816, 299.282 )
 script = ExtResource( 2 )
 
-[node name="Player_tex" type="Sprite" parent="Player"]
+[node name="Player_tex" type="AnimatedSprite" parent="Player"]
 rotation = 1.5708
 scale = Vector2( 0.166, 0.135714 )
-texture = ExtResource( 3 )
+frames = SubResource( 1 )
+animation = "fly"
 
 [node name="Player_col" type="CollisionShape2D" parent="Player"]
 position = Vector2( 1.75, -4.90005 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
+zoom = Vector2( 2, 2 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="space_tex" type="Sprite" parent="ParallaxBackground"]
 position = Vector2( 495.796, 291.255 )
 scale = Vector2( 1.14202, 0.72108 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 

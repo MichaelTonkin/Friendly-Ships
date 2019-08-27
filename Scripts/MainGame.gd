@@ -26,3 +26,10 @@ func spawn_ships():
 		randomLoc = get_node("Player").get_position() + Vector2(int(rand_range(-500, 500)), int(rand_range(-500, 500)))
 		s.set_position(randomLoc)
 		numShipsOnScreen += 1
+		
+func set_score(var num):
+	score += num
+	print(score)
+	
+func get_score():
+	return score

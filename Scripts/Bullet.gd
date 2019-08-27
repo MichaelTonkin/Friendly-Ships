@@ -2,7 +2,9 @@ extends KinematicBody2D
 
 var destination
 var timesCollided = 0
-var shooter = ""
+var shooter
+var alive1
+var alive2
 
 func _ready():
 	set_process(true)
@@ -12,13 +14,19 @@ func _physics_process(delta):
 	
 	#this is what we will do if a collision is detected
 	if collision:
-		print(collision.collider.name)
-		if(collision.collider.name == shooter):
-			return
-		else:
-			queue_free()
-			if(collision.collider.has_method("setHealth")):
-				collision.collider.setHealth(collision.collider.getHealth() - 50)
+		#check to see if an enemy was shooting
+		alive1 = weakref(shooter)
+		alive2 = weakref(collision.collider)
+		if(alive1.get_ref() and alive2.get_ref()):
+			if((alive1.get_ref().has_method("isEnemy")) and (alive2.get_ref().has_method("isEnemy"))): #if an enemy bullet hits another enemy, ignore it
+				queue_free()
+			else:
+				if(collision.collider == shooter):
+					queue_free()
+				else:
+					queue_free()
+					if(collision.collider.has_method("setHealth")):
+						collision.collider.setHealth(collision.collider.getHealth() - 50)
 			
 #function:set_direction
 #description: initialises the bullet's direction

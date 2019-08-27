@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 const SPEED = 500
-var health = 100
+var health = 500
 var mousePosition
 var velocity
 var globalMouse
@@ -12,8 +12,9 @@ func _ready():
 	set_process(true)
 	
 func _process(delta):
-	if(health <= 0):
-		queue_free()
+	#if(health <= 0):
+		#queue_free()
+	pass
 	
 func _physics_process(delta):
 	move_player(delta)
@@ -33,6 +34,9 @@ func move_player(delta):
 		globalMouse = get_global_mouse_position()
 		velocity = (globalMouse - position).normalized()
 		move_and_collide(velocity * SPEED * delta)
+		
+		#play animation
+		$Player_tex.play("fly")
 
 #function: fire_controller
 #description: handles shooting
@@ -47,7 +51,7 @@ func fire_controller(delta):
 		var l = laser.instance()
 		get_tree().get_root().add_child(l)
 		l.add_collision_exception_with(self)
-		l.set_shooters_name(self.name)
+		l.set_shooters_name(self)
 		l.set_position(self.position)
 		
 		l.set_direction(fireDest * 800 * delta)
