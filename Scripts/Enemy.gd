@@ -8,7 +8,7 @@ var friendly = false # 20% chance of being friendly
 var ally = false #only true if entity is turned into ally
 var fireDest
 var reloading = 0.0
-var RELOAD_TIME = 1.0
+var RELOAD_TIME = 2.0
 var attFormation
 onready var laser = preload("res://Scenes/Bullets.tscn")
 #onready var main = load("res://Scripts/MainGame.gd")
@@ -19,14 +19,17 @@ func _ready():
 	player = get_node("/root/MainGame/Player") 
 	main = get_node("/root/MainGame/")
 	set_process(true) 
-	rand1 = rand_range(rand_range(-400, -200), rand_range(200, 400))
-	rand2 = rand_range(rand_range(-400, -200), rand_range(200, 400))
+	rand1 = rand_range(rand_range(-600, -500), rand_range(500, 600))
+	rand2 = rand_range(rand_range(-600, -500), rand_range(500, 600))
 	#check if this entity could be friendly
 	var alignCheck = rand_range(0, 100)
 	if(alignCheck <=20):
+		print(friendly)
 		friendly = true
 
 func _process(delta):
+	
+	attempt_align_shift()
 	
 	if(health <= 0):
 		main.score += 100
@@ -46,8 +49,6 @@ func aim_and_move(delta):
 	#if the entity is an ally make it follow right behind the player
 	if(ally == true):
 		move_and_collide((playerPos) * speed * delta)
-		set_collision_layer_bit(3, true)
-		set_collision_layer_bit(1, false)
 	else:
 		attFormation = (((player.location - Vector2(rand1, rand2)) - self.position).normalized()*0.1)
 		move_and_collide((attFormation) * (speed+1000) * delta)
@@ -73,8 +74,9 @@ func open_fire(delta):
 	
 func attempt_align_shift():
 	if(Input.is_action_just_pressed("space_bar") and friendly):
-			ally = true
-			get_node("Enemy_tex").set_texture("Res://icon.png")
+		ally = true
+		$Enemy_tex.stop()
+		$Enemy_tex.play("ally")
 
 func setHealth(var num):
 	health = num

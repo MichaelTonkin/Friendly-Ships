@@ -13,10 +13,9 @@ func _ready():
 	set_process(true)
 	
 func _process(delta):
-	if(health <= 0):
-		queue_free()
+	#if(health <= 0):
+		#queue_free()
 	pass
-	
 func _physics_process(delta):
 	move_player(delta)
 	fire_controller(delta)

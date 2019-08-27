@@ -14,26 +14,26 @@ func _ready():
 func _process(delta):
 	spawn_ships()
 
-	
+#function: ship_spawner
+#Description: called when a new ship needs to be spawned.
+#Warning/s: Do no confuse with 'spawn_ships()', which handles the spawning rules. This only handles the generation aspect.
+func ship_spawner():
+	var s = ship.instance()
+	add_child(s)
+	randomLoc = get_node("Player").get_position() + Vector2(int(rand_range(-500, 500)), int(rand_range(-500, 500)))
+	s.set_position(randomLoc)
+	numShipsOnScreen += 1
+
 #function:spawn_ships
 #description: handles the spawning and rules of spawning all ships in the game
 func spawn_ships():
 	
 	#if score is < 500 spawn 5 ships
 	if((numShipsOnScreen < 5)):
-		var s = ship.instance()
-		add_child(s)
-		randomLoc = get_node("Player").get_position() + Vector2(int(rand_range(-500, 500)), int(rand_range(-500, 500)))
-		s.set_position(randomLoc)
-		numShipsOnScreen += 1
-		
-#static func set_score(var num):
-#	score += num
-#	print(score)
-#
-#func get_score():
-#	return score
-#
-#static func setShips(var num):
-#	numShipsOnScreen += num
-#	print(numShipsOnScreen)
+		ship_spawner()
+	if( (score > 500) and (numShipsOnScreen < 7) ): ship_spawner()
+	if( (score > 1000) and (numShipsOnScreen < 10) ): ship_spawner()
+	if( (score > 2000) and (numShipsOnScreen < 13) ): ship_spawner()
+	if( (score > 4000) and (numShipsOnScreen < 15) ): ship_spawner()
+
+
