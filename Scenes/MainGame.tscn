@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/MainGame.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Textures/player_ship_move2.png" type="Texture" id=4]
 [ext_resource path="res://Textures/Sky_tex.png" type="Texture" id=5]
 [ext_resource path="res://Sounds/Music/Background.ogg" type="AudioStream" id=6]
+[ext_resource path="res://Textures/Scenery/Asteroid_1.png" type="Texture" id=7]
+[ext_resource path="res://Textures/Scenery/Asteroid_2.png" type="Texture" id=8]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -49,4 +51,14 @@ texture = ExtResource( 5 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 autoplay = true
+
+[node name="Asteroid_1" type="Sprite" parent="."]
+position = Vector2( -320.911, 343.467 )
+scale = Vector2( 0.358178, 0.313066 )
+texture = ExtResource( 7 )
+
+[node name="Asteroid_2" type="Sprite" parent="."]
+position = Vector2( 825.346, -64.5923 )
+scale = Vector2( 0.358178, 0.313066 )
+texture = ExtResource( 8 )
 

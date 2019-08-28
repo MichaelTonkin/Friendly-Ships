@@ -13,9 +13,10 @@ func _ready():
 	set_process(true)
 	
 func _process(delta):
-	#if(health <= 0):
-		#queue_free()
-	pass
+	if(health <= 0):
+	# open the store
+		get_tree().change_scene("res://Scenes/Menus/Store.tscn")
+	
 func _physics_process(delta):
 	move_player(delta)
 	fire_controller(delta)

@@ -5,6 +5,7 @@ var timesCollided = 0
 var shooter
 var alive1
 var alive2
+var explos_1 = preload("res://Textures/Explosions/Explosion_1.png")
 
 func _ready():
 	set_process(true)
@@ -24,6 +25,7 @@ func _physics_process(delta):
 				if(collision.collider == shooter):
 					queue_free()
 				else:
+					get_node("Sprite").set_texture(explos_1)
 					queue_free()
 					if(collision.collider.has_method("setHealth")):
 						collision.collider.setHealth(collision.collider.getHealth() - 50)
