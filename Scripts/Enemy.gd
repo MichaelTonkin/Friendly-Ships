@@ -81,13 +81,15 @@ func attempt_align_shift():
 	
 	distance2Player = self.get_global_position().distance_to(player.get_position())
 	
-	if(Input.is_action_just_pressed("space_bar") and friendly and (distance2Player<10)):
-		ally = true
-		main.numShipsOnScreen -=1
-		$Enemy_tex.stop()
-		$Enemy_tex.play("ally")
-	if(Input.is_action_just_pressed("space_bar") and !friendly):
-		$Status_tex.set_texture(aFail)
+	if(distance2Player<100):
+	
+		if(Input.is_action_just_pressed("space_bar") and friendly):
+			ally = true
+			main.numShipsOnScreen -=1
+			$Enemy_tex.stop()
+			$Enemy_tex.play("ally")
+		elif(Input.is_action_just_pressed("space_bar") and !friendly):
+			$Status_tex.set_texture(aFail)
 
 func ally_score_contribute(delta):
 	if(ally):
