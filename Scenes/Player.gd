@@ -49,6 +49,8 @@ func fire_controller(delta):
 		globalMouse = get_global_mouse_position()
 		fireDest = (globalMouse - position).normalized()
 		
+		$pew.play()
+		
 		var l = laser.instance()
 		get_tree().get_root().add_child(l)
 		l.add_collision_exception_with(self)

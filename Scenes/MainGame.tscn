@@ -1,13 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/MainGame.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.gd" type="Script" id=2]
 [ext_resource path="res://Textures/player_ship_move1.png" type="Texture" id=3]
 [ext_resource path="res://Textures/player_ship_move2.png" type="Texture" id=4]
-[ext_resource path="res://Textures/Sky_tex.png" type="Texture" id=5]
-[ext_resource path="res://Sounds/Music/Background.ogg" type="AudioStream" id=6]
-[ext_resource path="res://Textures/Scenery/Asteroid_1.png" type="Texture" id=7]
-[ext_resource path="res://Textures/Scenery/Asteroid_2.png" type="Texture" id=8]
+[ext_resource path="res://Sounds/laser.wav" type="AudioStream" id=5]
+[ext_resource path="res://Textures/Sky_tex.png" type="Texture" id=6]
+[ext_resource path="res://Sounds/Music/Background.ogg" type="AudioStream" id=7]
+[ext_resource path="res://Textures/Scenery/Asteroid_1.png" type="Texture" id=8]
+[ext_resource path="res://Textures/Scenery/Asteroid_2.png" type="Texture" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -30,6 +31,7 @@ script = ExtResource( 2 )
 [node name="Player_tex" type="AnimatedSprite" parent="Player"]
 rotation = 1.5708
 scale = Vector2( 0.166, 0.135714 )
+z_index = 2
 frames = SubResource( 1 )
 animation = "fly"
 
@@ -41,24 +43,35 @@ shape = SubResource( 2 )
 current = true
 zoom = Vector2( 2, 2 )
 
+[node name="pew" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource( 5 )
+volume_db = -35.34
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="space_tex" type="Sprite" parent="ParallaxBackground"]
 position = Vector2( 495.796, 291.255 )
 scale = Vector2( 1.14202, 0.72108 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
+
+[node name="UI_score" type="Label" parent="ParallaxBackground"]
+margin_right = 40.0
+margin_bottom = 14.0
+rect_scale = Vector2( 1.51044, 2.3866 )
+text = "0"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
+stream = ExtResource( 7 )
+volume_db = -25.243
 autoplay = true
 
 [node name="Asteroid_1" type="Sprite" parent="."]
 position = Vector2( -320.911, 343.467 )
 scale = Vector2( 0.358178, 0.313066 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 
 [node name="Asteroid_2" type="Sprite" parent="."]
 position = Vector2( 825.346, -64.5923 )
 scale = Vector2( 0.358178, 0.313066 )
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 

@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Textures/enemy_tex_3.png" type="Texture" id=2]
+[ext_resource path="res://Textures/ally_tex_1.png" type="Texture" id=3]
+[ext_resource path="res://Sounds/laser.wav" type="AudioStream" id=4]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -9,10 +11,15 @@ animations = [ {
 "loop": true,
 "name": "default",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "ally",
+"speed": 5.0
 } ]
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 5.06391
+radius = 7.04875
 
 [node name="Enemy" type="KinematicBody2D"]
 z_as_relative = false
@@ -29,6 +36,12 @@ playing = true
 
 [node name="Enemy_col" type="CollisionShape2D" parent="."]
 position = Vector2( -0.205303, 0.43941 )
-scale = Vector2( 7.96894, 10.9401 )
+scale = Vector2( 7.96894, 6.4601 )
 shape = SubResource( 2 )
+
+[node name="Status_tex" type="Sprite" parent="."]
+
+[node name="pew" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+volume_db = -35.34
 

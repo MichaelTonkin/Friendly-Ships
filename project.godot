@@ -19,6 +19,11 @@ config/name="Friendly Ships"
 run/main_scene="res://Scenes/MainGame.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Globals="*res://Scripts/Globals.gd"
+Game_Timer="*res://Scenes/Game_Timer.tscn"
+
 [input]
 
 move_up={

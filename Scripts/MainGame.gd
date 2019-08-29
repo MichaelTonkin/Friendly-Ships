@@ -4,7 +4,6 @@
 extends Node2D
 
 onready var ship = load("res://Scenes/Enemy.tscn")
-var score = 0
 var numShipsOnScreen = 0 #the number of ships currently in the game
 var randomLoc
 
@@ -13,6 +12,7 @@ func _ready():
 	
 func _process(delta):
 	spawn_ships()
+	get_node("ParallaxBackground/UI_score").set_text(str(Globals.score))
 
 #function: ship_spawner
 #Description: called when a new ship needs to be spawned.
@@ -31,9 +31,10 @@ func spawn_ships():
 	#if score is < 500 spawn 5 ships
 	if((numShipsOnScreen < 5)):
 		ship_spawner()
-	if( (score > 500) and (numShipsOnScreen < 7) ): ship_spawner()
-	if( (score > 1000) and (numShipsOnScreen < 10) ): ship_spawner()
-	if( (score > 2000) and (numShipsOnScreen < 13) ): ship_spawner()
-	if( (score > 4000) and (numShipsOnScreen < 15) ): ship_spawner()
+	if( (Globals.score > 500) and (numShipsOnScreen < 7) ): ship_spawner()
+	if( (Globals.score > 1000) and (numShipsOnScreen < 10) ): ship_spawner()
+	if( (Globals.score > 2000) and (numShipsOnScreen < 13) ): ship_spawner()
+	if( (Globals.score > 4000) and (numShipsOnScreen < 15) ): ship_spawner()
+
 
 
