@@ -32,8 +32,33 @@ func move_player(delta):
 	#make the player ship follow the mouse
 	if(Input.is_action_pressed("move_up")):
 		
-		globalMouse = get_global_mouse_position()
-		velocity = (globalMouse - position).normalized()
+		#globalMouse = get_global_mouse_position()
+		#velocity = (globalMouse - position).normalized()
+		velocity = (Vector2(0, -1))
+		move_and_collide(velocity * SPEED * delta)
+		location = self.position
+		#play animation
+		$Player_tex.play("fly")
+		
+	if(Input.is_action_pressed("move_down")):
+		
+		velocity = (Vector2(0, 1))
+		move_and_collide(velocity * SPEED * delta)
+		location = self.position
+		#play animation
+		$Player_tex.play("fly")
+		
+	if(Input.is_action_pressed("move_left")):
+		
+		velocity = (Vector2(-1, 0))
+		move_and_collide(velocity * SPEED * delta)
+		location = self.position
+		#play animation
+		$Player_tex.play("fly")
+		
+	if(Input.is_action_pressed("move_right")):
+		
+		velocity = (Vector2(1, 0))
 		move_and_collide(velocity * SPEED * delta)
 		location = self.position
 		#play animation
